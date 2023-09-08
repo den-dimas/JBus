@@ -13,7 +13,7 @@ public class JBus
         System.out.println("Harga asli : " + getOriginalPrice(1000, 0.0f));
         System.out.println("Biaya admin (%): " + getAdminFeePercentage());
         System.out.println("Biaya admin : " + getAdminFee(500));
-        System.out.println("Total harga : " + getTotalPrice(5000, 1));
+        System.out.println("Total harga : " + getTotalPrice(10000, 2));
     }
 
     public static int getBusId() {
@@ -61,6 +61,6 @@ public class JBus
     }
     
     public static int getTotalPrice(int price, int numberOfSeat) {
-        return price * numberOfSeat + getAdminFee(price);
+        return price * numberOfSeat + getAdminFee(price * numberOfSeat);
     }
 }
