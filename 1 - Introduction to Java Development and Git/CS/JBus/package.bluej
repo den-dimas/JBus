@@ -1,3 +1,31 @@
 #BlueJ package file
-#Fri Sep 08 10:21:55 WIB 2023
+editor.fx.0.height=822
+editor.fx.0.width=780
+editor.fx.0.x=760
+editor.fx.0.y=0
+objectbench.height=348
+objectbench.width=743
+package.divider.horizontal=0.6
+package.divider.vertical=0.5083056478405316
+package.editor.height=360
+package.editor.width=656
+package.editor.x=761
+package.editor.y=0
+package.frame.height=822
+package.frame.width=780
+package.numDependencies=0
+package.numTargets=1
+package.showExtends=true
+package.showUses=true
 project.charset=UTF-8
+readme.height=60
+readme.name=@README
+readme.width=49
+readme.x=10
+readme.y=10
+target1.height=82
+target1.name=dimasDermawanJBusIO
+target1.type=PackageTarget
+target1.width=150
+target1.x=220
+target1.y=163
