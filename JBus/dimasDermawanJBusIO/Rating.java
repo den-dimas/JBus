@@ -28,7 +28,7 @@ public class Rating
         if (this.count == 0) {
             return 0.0;
         } else {
-            return this.total / this.count;
+            return (double) (this.total / this.count);
         }
     }
 }

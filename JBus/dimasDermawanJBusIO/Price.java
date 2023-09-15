@@ -26,10 +26,10 @@ public class Price
     }
     
     private double getDiscountedPrice() {
-        if (this.discount >= 100) {
+        if (discount >= 100) {
             return 0.0;   
         } else {
-            return (1 - (this.discount / 100)) * this.price;
+            return (1 - (discount / 100.0f)) * price;
         }
     }
     
