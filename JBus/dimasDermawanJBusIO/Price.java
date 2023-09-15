@@ -8,20 +8,37 @@ public class Price
     public int discount;
     
     public Price(double price) {
-        price = price;
-        rebate = 0.0;
-        discount = 0;
+        this.price = price;
+        this.rebate = 0.0;
+        this.discount = 0;
     }
     
     public Price(double price, int discount) {
-        price = price;
-        discount = discount;
-        rebate = 0.0;
+        this.price = price;
+        this.discount = discount;
+        this.rebate = 0.0;
     }
     
     public Price(double price, double rebate) {
-        price = price;
-        rebate = rebate;
-        discount = 0;
+        this.price = price;
+        this.rebate = rebate;
+        this.discount = 0;
+    }
+    
+    private double getDiscountedPrice() {
+        if (this.discount >= 100) {
+            return 0.0;   
+        } else {
+            return (1 - (this.discount / 100)) * this.price;
+        }
+    }
+    
+    private double getRebatedPrice() {
+        if (this.rebate > this.price) {
+            return 0.0;
+        } else {
+            return this.price - this.rebate;
+        }
+        
     }
 }

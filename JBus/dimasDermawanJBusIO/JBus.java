@@ -5,17 +5,21 @@ import java.io.*;
 public class JBus
 {   
     public static void main(String[] args) {
-        System.out.println("Bus ID : " + getBusId());
-        System.out.println("Nama Bus : " + getBusName());
-        System.out.println("Discount? : " + isDiscount());
-        System.out.println("Besar diskon : " + getDiscountPercentage(1000, 0));
-        System.out.println("Harga setelah diskon : " + getDiscountedPrice(1000, 100.0f));
-        System.out.println("Harga asli : " + getOriginalPrice(1000, 0.0f));
-        System.out.println("Biaya admin (%): " + getAdminFeePercentage());
-        System.out.println("Biaya admin : " + getAdminFee(500));
-        System.out.println("Total harga : " + getTotalPrice(10000, 2));
+        Bus testBus = createBus();
+        
+        System.out.println(testBus.name);
+        System.out.println(testBus.facility);
+        System.out.println(testBus.price.price);
+        System.out.println(testBus.capacity);
     }
 
+    public static Bus createBus() {
+        Price price = new Price(0, 0);
+        Bus bus = new Bus("Dermawan's Bus", Facility.AC, price, 56);
+        
+        return bus;
+    }
+    
     public static int getBusId() {
         return 0;
     }
