@@ -14,7 +14,7 @@ public class JBus
     }
 
     public static Bus createBus() {
-        Price price = new Price(100000, 50);
+        Price price = new Price(100000, 50000);
         Bus bus = new Bus("Dermawan's Bus", Facility.AC, price, 56);
         
         return bus;
