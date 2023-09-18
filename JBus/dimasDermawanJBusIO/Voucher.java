@@ -35,11 +35,19 @@ public class Voucher
     }
     
     public double apply(Price price) {
+        if (this.cut < 0.0) {
+            return price.price;
+        }
+        
         this.used = true;
         
         switch(type) {
             case DISCOUNT:
-                return price.price * (1 - (this.cut / 100.0));
+                if (this.cut > 100.0) {
+                    return 0.0;
+                } else {
+                    return price.price * (1 - (this.cut / 100.0));   
+                }
             case REBATE:
                 if (this.cut > price.price) {
                     return 0.0;
