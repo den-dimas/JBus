@@ -2,8 +2,7 @@ package dimasDermawanJBusIO;
 
 import java.io.*;
 
-public class JBus
-{   
+public class JBus {   
     public static void main(String[] args) {
         Bus testBus = createBus();
         
@@ -15,7 +14,7 @@ public class JBus
 
     public static Bus createBus() {
         Price price = new Price(100000, 50000);
-        Bus bus = new Bus("Dermawan's Bus", Facility.AC, price, 56);
+        Bus bus = new Bus(72, "Dermawan's Bus", Facility.AC, price, 56);
         
         return bus;
     }
