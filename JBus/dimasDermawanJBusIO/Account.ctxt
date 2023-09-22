@@ -2,4 +2,5 @@
 comment0.target=Account
 comment1.params=id\ name\ email\ password
 comment1.target=Account(int,\ java.lang.String,\ java.lang.String,\ java.lang.String)
+comment1.text=\r\n\ Melakukan\ pembuatan\ akun.\r\n\ \r\n\ @param\ id\ ID\ akun\r\n\ @param\ name\ Nama\ akun\r\n\ @param\ email\ Email\ akun\r\n\ @param\ password\ Password\ akun\r\n
 numComments=2
