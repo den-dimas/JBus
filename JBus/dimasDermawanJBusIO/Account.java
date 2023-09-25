@@ -6,7 +6,7 @@ public class Account extends Serializable {
     public String password;
     
     /**
-     * Melakukan pembuatan akun.
+     * Untuk membuat akun.
      * 
      * @param id ID akun
      * @param name Nama akun
@@ -19,5 +19,9 @@ public class Account extends Serializable {
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+    
+    public String toString() {
+        return "ID Akun : " + super.id + "\nNama : " + name + "\nEmail : " + email + "\nPassword : " + password + "\n";
     }
 }

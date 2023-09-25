@@ -1,7 +1,6 @@
 package dimasDermawanJBusIO;
 
-public class Rating
-{
+public class Rating {
     // Fields
     private long count;
     private long total;
@@ -30,5 +29,9 @@ public class Rating
         } else {
             return (double) (this.total / this.count);
         }
+    }
+    
+    public String toString() {
+        return "Rating's Count : " + getCount() + "\nTotal Ratings : " + getTotal() + "\n";
     }
 }

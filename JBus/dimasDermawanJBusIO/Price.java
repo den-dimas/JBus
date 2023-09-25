@@ -1,7 +1,6 @@
 package dimasDermawanJBusIO;
 
-public class Price
-{
+public class Price {
     // Fields
     public double rebate;
     public double price;
@@ -14,5 +13,9 @@ public class Price
     public Price(double price, double rebate) {
         this.price = price;
         this.rebate = rebate;
+    }
+    
+    public String toString() {
+        return "Harga : " + price + "\nPotongan : " + rebate + "\n";
     }
 }
