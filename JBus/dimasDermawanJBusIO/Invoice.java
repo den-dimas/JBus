@@ -18,6 +18,7 @@ public class Invoice extends Serializable {
         
         // Stamp time
         time = Calendar.getInstance();
+        time.getTime();
         
         this.buyerId = buyerId;
         this.renterId = renterId;
@@ -32,6 +33,7 @@ public class Invoice extends Serializable {
         
         // Stamp time
         time = Calendar.getInstance();
+        time.getTime();
         
         this.buyerId = buyer.id;
         this.renterId = renter.id;

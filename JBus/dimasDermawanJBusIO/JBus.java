@@ -22,11 +22,15 @@ public class JBus {
         System.out.println("Above 10000.0");
         System.out.println(Validate.filter(unfilteredArray, 10000, false));
         
+        System.out.println("\nTest Bus");
+        
         Bus testBus = createBus();
         Payment testPayment = new Payment(1, 1, 1, testBus.id, "S1");
         
         System.out.println(testPayment.getDepartureInfo());
         System.out.println(testPayment.getTime());
+        
+        System.out.println("\nTest Schedule");
         
         Calendar schedule1 = Calendar.getInstance();
         testBus.addSchedule(schedule1);

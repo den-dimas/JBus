@@ -26,7 +26,7 @@ public class Payment extends Invoice {
         this.busSeat = busSeat;
         
         this.departureDate = Calendar.getInstance();
-        this.departureDate.add(Calendar.DATE, 2);
+        this.departureDate.add(Calendar.DAY_OF_MONTH, 2);
     }
     
     public int getBusId() {
@@ -44,7 +44,7 @@ public class Payment extends Invoice {
     public String getTime() {
         SimpleDateFormat SDFormat = new SimpleDateFormat("MMMM dd, yyyy hh:mm:ss");
         
-        String current = SDFormat.format(this.departureDate.getTime());
+        String current = SDFormat.format(this.time.getTime());
         
         return current;
     }
