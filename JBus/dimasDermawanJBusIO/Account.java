@@ -1,6 +1,6 @@
 package dimasDermawanJBusIO;
 
-public class Account extends Serializable {
+public class Account extends Serializable implements FileParser {
     public String email;
     public String name;
     public String password;
@@ -23,5 +23,13 @@ public class Account extends Serializable {
     
     public String toString() {
         return "ID Akun : " + super.id + "\nNama : " + name + "\nEmail : " + email + "\nPassword : " + password + "\n";
+    }
+    
+    public Object write() {
+        return new int[10];
+    }
+    
+    public boolean read(String string) {
+        return true;
     }
 }

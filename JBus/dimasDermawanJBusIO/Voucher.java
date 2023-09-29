@@ -2,7 +2,7 @@ package dimasDermawanJBusIO;
 
 import java.io.*;
 
-public class Voucher extends Serializable {
+public class Voucher extends Serializable implements FileParser {
     private boolean used;
     
     public String name;
@@ -58,5 +58,13 @@ public class Voucher extends Serializable {
             default:
                 return price.price;
         }
+    }
+    
+    public Object write() {
+        return new int[10];
+    }
+    
+    public boolean read(String string) {
+        return true;
     }
 }

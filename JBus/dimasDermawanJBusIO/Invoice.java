@@ -1,7 +1,9 @@
 package dimasDermawanJBusIO;
 
+import java.util.Calendar;
+
 public class Invoice extends Serializable {
-    public String time;
+    public Calendar time;
     public int buyerId;
     public int renterId;
     
@@ -11,8 +13,11 @@ public class Invoice extends Serializable {
     public enum BusRating { NONE, NEUTRAL, GOOD, BAD }
     public enum PaymentStatus { FAILED, WAITING, SUCCESS }
     
-    protected Invoice(int id, int buyerId, int renterId, String time) {
+    protected Invoice(int id, int buyerId, int renterId) {
         super(id);
+        
+        // Stamp time
+        time = Calendar.getInstance();
         
         this.buyerId = buyerId;
         this.renterId = renterId;
@@ -22,8 +27,11 @@ public class Invoice extends Serializable {
         this.status = PaymentStatus.WAITING;
     }
     
-    public Invoice(int id, Account buyer, Renter renter, String time) {
+    public Invoice(int id, Account buyer, Renter renter) {
         super(id);
+        
+        // Stamp time
+        time = Calendar.getInstance();
         
         this.buyerId = buyer.id;
         this.renterId = renter.id;
@@ -34,6 +42,6 @@ public class Invoice extends Serializable {
     }
     
     public String toString() {
-        return "Nomor Faktur : " + super.id + "\nID Pembeli : " + buyerId + "\nID Penyewa : " + renterId + "\nWaktu Sewa: " + time + "\n";
+        return "Nomor Faktur : " + super.id + "\nID Pembeli : " + buyerId + "\nID Penyewa : " + renterId + "\n";
     }
 }
