@@ -1,9 +1,9 @@
 package dimasDermawanJBusIO;
 
-import java.util.Calendar;
+import java.sql.Timestamp;
 
 public class Invoice extends Serializable {
-    public Calendar time;
+    public Timestamp time;
     public int buyerId;
     public int renterId;
     
@@ -17,8 +17,7 @@ public class Invoice extends Serializable {
         super(id);
         
         // Stamp time
-        time = Calendar.getInstance();
-        time.getTime();
+        time = new Timestamp(System.currentTimeMillis());
         
         this.buyerId = buyerId;
         this.renterId = renterId;
@@ -32,8 +31,7 @@ public class Invoice extends Serializable {
         super(id);
         
         // Stamp time
-        time = Calendar.getInstance();
-        time.getTime();
+        time = new Timestamp(System.currentTimeMillis());
         
         this.buyerId = buyer.id;
         this.renterId = renter.id;

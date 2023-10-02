@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Map;
+import java.sql.Timestamp;
 import java.text.*;
 
 public class Bus extends Serializable implements FileParser {
@@ -44,29 +45,7 @@ public class Bus extends Serializable implements FileParser {
         return true;
     }
     
-    public void addSchedule(Calendar calendar) {
-        Schedule schedule = new Schedule(calendar, capacity);
-        
-        schedules.add(schedule);
-    }
-    
-    public void printSchedule(Schedule schedule) {
-        SimpleDateFormat SDFormat = new SimpleDateFormat("MMMM dd, yyyy hh:mm:ss");
-        
-        String current = SDFormat.format(schedule.departureSchedule.getTime());
-        
-        System.out.println("Tanggal keberangkatan: " + current + "\nDaftar kursi:");
-        
-        int i = 0;
-        for (Map.Entry<String, Boolean> map : schedule.seatAvailability.entrySet()) {        
-            System.out.print(map.getKey() + " : " + map.getValue() + " ");
-            i++;
-            if (i == 4) {
-                System.out.print("\n");
-                i = 0;
-            }
-        }
-        
-        System.out.print("\n");
+    public void addSchedule(Timestamp time, int numberOfSeats) {
+        schedules.add(new Schedule(time, numberOfSeats));
     }
 }

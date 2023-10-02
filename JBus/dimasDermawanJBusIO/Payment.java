@@ -1,32 +1,30 @@
 package dimasDermawanJBusIO;
 
 import java.text.*;
-import java.util.Calendar;
+import java.sql.Timestamp;
 
 public class Payment extends Invoice {
     private int busId;
     
     public String busSeat;
-    public Calendar departureDate;
+    public Timestamp departureDate;
     
-    public Payment(int id, int buyerId, int renterId, int busId, String busSeat) {
+    public Payment(int id, int buyerId, int renterId, int busId, String busSeat, Timestamp departureDate) {
         super(id, buyerId, renterId);
         
         this.busId = busId;        
         this.busSeat = busSeat;
         
-        this.departureDate = Calendar.getInstance();
-        this.departureDate.add(Calendar.DATE, 2);
+        this.departureDate = departureDate;
     }
     
-    public Payment(int id, Account buyer, Renter renter, int busId, String busSeat) {
+    public Payment(int id, Account buyer, Renter renter, int busId, String busSeat, Timestamp departureDate) {
         super(id, buyer, renter);
         
         this.busId = busId;
         this.busSeat = busSeat;
         
-        this.departureDate = Calendar.getInstance();
-        this.departureDate.add(Calendar.DAY_OF_MONTH, 2);
+        this.departureDate = departureDate;
     }
     
     public int getBusId() {
@@ -47,5 +45,27 @@ public class Payment extends Invoice {
         String current = SDFormat.format(this.time.getTime());
         
         return current;
+    }
+    
+    public static boolean isAvailable(Timestamp departureSchedule, String seat, Bus bus) {
+        for (Schedule schedule : bus.schedules) {
+            if (departureSchedule.compareTo(schedule.departureSchedule) == 0 && schedule.isSeatAvailable(seat)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    public static boolean makeBooking(Timestamp departureSchedule, String seat, Bus bus) {
+        for (Schedule schedule : bus.schedules) {
+            if (departureSchedule.compareTo(schedule.departureSchedule) == 0 && schedule.isSeatAvailable(seat)) {
+                schedule.bookSeat(seat);
+                
+                return true;
+            }
+        }
+        
+        return false;
     }
 }
