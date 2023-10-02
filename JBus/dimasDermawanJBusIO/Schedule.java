@@ -35,7 +35,8 @@ public class Schedule {
         int currentSeat = 1;
         
         for (String seat : this.seatAvailability.keySet()) {
-            String symbol = this.seatAvailability.get(seat)? "O" : "X";
+            String symbol = this.seatAvailability.get(seat) ? "O" : "X";
+            
             System.out.print(seat + " : " + symbol + "\t");
             if (currentSeat % maxSeatsPerRow == 0) {
                 System.out.println();
