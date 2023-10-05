@@ -1,4 +1,0 @@
-PROJECT TITLE: JBus
-PURPOSE OF PROJECT: Praktikum OOP
-VERSION or DATE: Semester 3
-AUTHORS: Dimas Dermawan
