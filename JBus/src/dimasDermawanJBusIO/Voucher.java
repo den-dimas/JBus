@@ -11,9 +11,7 @@ public class Voucher extends Serializable implements FileParser {
     public int code;
     public Type type;
     
-    public Voucher(int id, String name, int code, Type type, double minimum, double cut) {
-        super(id);
-        
+    public Voucher(String name, int code, Type type, double minimum, double cut) {
         this.name = name;
         this.code = code;
         this.type = type;
@@ -28,11 +26,7 @@ public class Voucher extends Serializable implements FileParser {
     }
     
     public boolean canApply(Price price) {
-        if (price.price > this.minimum && this.used == false) {
-            return true;
-        }
-        
-        return false;
+        return price.price > this.minimum && this.used == false;
     }
     
     public double apply(Price price) {

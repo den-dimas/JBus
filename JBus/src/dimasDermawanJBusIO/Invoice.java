@@ -14,8 +14,6 @@ public class Invoice extends Serializable {
     public enum PaymentStatus { FAILED, WAITING, SUCCESS }
     
     protected Invoice(int id, int buyerId, int renterId) {
-        super(id);
-        
         // Stamp time
         time = new Timestamp(System.currentTimeMillis());
         
@@ -28,8 +26,6 @@ public class Invoice extends Serializable {
     }
     
     public Invoice(int id, Account buyer, Renter renter) {
-        super(id);
-        
         // Stamp time
         time = new Timestamp(System.currentTimeMillis());
         
