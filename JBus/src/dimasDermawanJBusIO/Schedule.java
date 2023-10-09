@@ -1,8 +1,6 @@
 package dimasDermawanJBusIO;
 
-import java.util.Calendar;
-import java.util.Map;
-import java.util.LinkedHashMap;
+import java.util.*;
 import java.sql.Timestamp;
 import java.text.*;
 
@@ -50,10 +48,32 @@ public class Schedule {
     public boolean isSeatAvailable(String seat) {
         return seatAvailability.containsKey(seat) && seatAvailability.get(seat);
     }
+
+    public boolean isSeatAvailable(List<String> seats) {
+        for (String seat : seats) {
+            if (!isSeatAvailable(seat))
+                return false;
+        }
+
+        return true;
+    }
     
     public void bookSeat(String seat) {
-        if (seatAvailability.containsKey(seat)) { 
+        if (isSeatAvailable(seat)) {
             seatAvailability.put(seat, false);
         }
+    }
+
+    public void bookSeat(List<String> seats) {
+        for (String seat : seats) {
+            if (isSeatAvailable(seat))
+                seatAvailability.put(seat, false);
+        }
+    }
+
+    public String toString() {
+        int occupied = Collections.frequency(seatAvailability.values(), false);
+
+        return "Schedule: " + departureSchedule + "\nOccupied: " + occupied + "/" + seatAvailability.size() + "\n";
     }
 }

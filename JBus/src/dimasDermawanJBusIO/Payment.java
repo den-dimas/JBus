@@ -1,7 +1,9 @@
 package dimasDermawanJBusIO;
 
+import java.sql.Time;
 import java.text.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Payment extends Invoice {
     private int busId;
@@ -46,15 +48,25 @@ public class Payment extends Invoice {
         
         return current;
     }
-    
-    public static boolean isAvailable(Timestamp departureSchedule, String seat, Bus bus) {
-        for (Schedule schedule : bus.schedules) {
-            if (departureSchedule.compareTo(schedule.departureSchedule) == 0 && schedule.isSeatAvailable(seat)) {
-                return true;
+
+    public static Schedule availableSchedule(Timestamp departureSchedule, String seat, Bus bus) {
+        for (Schedule s : bus.schedules) {
+            if (departureSchedule.compareTo(s.departureSchedule) == 0 && s.isSeatAvailable(seat)) {
+                return s;
             }
         }
-        
-        return false;
+
+        return null;
+    }
+
+    public static Schedule availableSchedule(Timestamp departureSchedule, List<String> seats, Bus bus) {
+        for (Schedule s : bus.schedules) {
+            if (departureSchedule.compareTo(s.departureSchedule) == 0 && s.isSeatAvailable(seats)) {
+                return s;
+            }
+        }
+
+        return null;
     }
     
     public static boolean makeBooking(Timestamp departureSchedule, String seat, Bus bus) {
@@ -66,6 +78,18 @@ public class Payment extends Invoice {
             }
         }
         
+        return false;
+    }
+
+    public static boolean makeBooking(Timestamp departureSchedule, List<String> seats, Bus bus) {
+        for (Schedule schedule : bus.schedules) {
+            if (departureSchedule.compareTo(schedule.departureSchedule) == 0 && schedule.isSeatAvailable(seats)) {
+                schedule.bookSeat(seats);
+
+                return true;
+            }
+        }
+
         return false;
     }
 }
