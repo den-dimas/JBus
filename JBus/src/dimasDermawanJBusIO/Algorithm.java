@@ -17,7 +17,7 @@ public class Algorithm {
     }
 
     public static <T> List<T> paginate(Iterator<T> iterator, int page, int pageSize, Predicate<T> pred) {
-        List<T> temp = new ArrayList<T>();
+        List<T> temp = new ArrayList<>();
 
         int numPerPage = 5;
         int startingPage = page * numPerPage;

@@ -1,13 +1,11 @@
 package dimasDermawanJBusIO;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Map;
 import java.sql.Timestamp;
-import java.text.*;
 
-public class Bus extends Serializable implements FileParser {
+public class Bus extends Serializable {
     public String name;
     public Station departure;
     public Station arrival;
@@ -34,16 +32,11 @@ public class Bus extends Serializable implements FileParser {
     public String toString() {
         return "Bus ID : " + super.id + "\nNama Bus : " + name + "\nBerangkat : " + departure.city + "\nTujuan : " + arrival.city + "\nHarga : " + price.price + "\nFasilitas : " + facility + "\nKapasitas: " + capacity + "\nTipe Bus : " + busType + "\nKota : " + city + "\n";
     }
-    
-    public Object write() {
-        return new int[10];
-    }
-    
-    public boolean read(String string) {
-        return true;
-    }
-    
-    public void addSchedule(Timestamp time) {
-        schedules.add(new Schedule(time, this.capacity));
+
+    public void addSchedule(Timestamp time) throws IOException {
+        if (!schedules.contains(new Schedule(time, this.capacity)))
+            schedules.add(new Schedule(time, this.capacity));
+        else
+            throw new IOException();
     }
 }
