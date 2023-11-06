@@ -1,38 +1,35 @@
 package dimasDermawanJBusIO;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class Serializable {
     public final int id;
-    private static HashMap<Class<?>, Integer> mapCounter = new HashMap<Class<?>, Integer>();
-    
-    protected Serializable() {
-        id = mapCounter.get(getClass()) == null ? 0 : mapCounter.get(getClass());
-
-        mapCounter.put(getClass(), id + 1);
+    private static HashMap<Class<?>, Integer> mapCounter = new HashMap<Class <?>, Integer>();
+    protected Serializable(){
+        Integer counter = mapCounter.get(getClass());
+        counter = counter == null ? 0 : counter + 1;
+        mapCounter.put(getClass(), counter);
+        this.id = counter;
     }
 
-    public static Integer getLastAssignedId(Class<?> c) {
-        return mapCounter.get(c);
+    public static <T> Integer getLastAssignedId(Class<T> getter ){
+        return mapCounter.get(getter);
     }
 
-    public static Integer setLastAssignedId(Class<?> c, int newId) {
-        mapCounter.put(c, newId);
-
-        return newId;
+    public static <T> Integer setLastAssignedId(Class<T> setter, int number){
+        return mapCounter.put(setter, number);
     }
 
-    public int compareTo(Serializable s) {
-        return Integer.compare(this.id, s.id);
+    public int compareTo(Serializable temp){
+        return ((Integer)this.id).compareTo(temp.id);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        return o instanceof Serializable && ((Serializable) o).id == this.id;
+    public boolean equals(Serializable temp){
+        return temp.id == this.id;
     }
 
-    public boolean equals(Serializable o) {
-        return o.id == this.id;
+    public boolean equals(Object object){
+        return object instanceof Serializable && ((Serializable) object).id == this.id;
     }
+
 }
