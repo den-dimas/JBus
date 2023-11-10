@@ -1,5 +1,7 @@
 package com.dimasDermawanJBusIO;
 
+import com.dimasDermawanJBusIO.dbjson.Serializable;
+
 import java.sql.Timestamp;
 
 public class Invoice extends Serializable {

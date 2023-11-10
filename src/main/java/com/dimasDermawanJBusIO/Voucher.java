@@ -1,5 +1,7 @@
 package com.dimasDermawanJBusIO;
 
+import com.dimasDermawanJBusIO.dbjson.Serializable;
+
 public class Voucher extends Serializable {
     private boolean used;
     

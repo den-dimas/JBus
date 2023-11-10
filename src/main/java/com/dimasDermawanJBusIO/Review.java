@@ -1,5 +1,7 @@
 package com.dimasDermawanJBusIO;
 
+import com.dimasDermawanJBusIO.dbjson.Serializable;
+
 public class Review extends Serializable {
     public String date;
     public String desc;

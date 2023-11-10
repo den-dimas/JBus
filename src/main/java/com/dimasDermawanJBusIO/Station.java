@@ -1,5 +1,7 @@
 package com.dimasDermawanJBusIO;
 
+import com.dimasDermawanJBusIO.dbjson.Serializable;
+
 public class Station extends Serializable {
     public String address;
     public String stationName;

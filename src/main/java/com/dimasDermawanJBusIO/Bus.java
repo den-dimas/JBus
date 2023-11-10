@@ -1,5 +1,7 @@
 package com.dimasDermawanJBusIO;
 
+import com.dimasDermawanJBusIO.dbjson.Serializable;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;

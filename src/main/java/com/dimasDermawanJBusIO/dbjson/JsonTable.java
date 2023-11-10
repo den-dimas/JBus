@@ -1,4 +1,4 @@
-package com.dimasDermawanJBusIO;
+package com.dimasDermawanJBusIO.dbjson;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;

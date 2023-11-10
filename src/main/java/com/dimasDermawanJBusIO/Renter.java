@@ -1,7 +1,8 @@
 package com.dimasDermawanJBusIO;
 
+import com.dimasDermawanJBusIO.dbjson.Serializable;
+
 import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 
 public class Renter extends Serializable {
     public String address;

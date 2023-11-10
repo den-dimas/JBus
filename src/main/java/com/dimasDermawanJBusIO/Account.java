@@ -1,6 +1,7 @@
 package com.dimasDermawanJBusIO;
 
-import java.util.Arrays;
+import com.dimasDermawanJBusIO.dbjson.Serializable;
+
 import java.util.regex.Pattern;
 
 public class Account extends Serializable {
@@ -8,8 +9,11 @@ public class Account extends Serializable {
     public String name;
     public String password;
 
-    private static final String REGEX_EMAIL = "^(^[a-zA-Z0-9])([a-zA-Z0-9\\.]+)([a-zA-Z0-9]+)(\\@)([a-zA-Z])+(\\.)(com)$";
-    private static final String REGEX_PASSWORD = "^(?!.*\\_)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])\\w{8,}$";
+    public Renter company;
+    public double balance;
+
+    public static final String REGEX_EMAIL = "^(^[a-zA-Z0-9])([a-zA-Z0-9\\.]+)([a-zA-Z0-9]+)(\\@)([a-zA-Z])+(\\.)(com)$";
+    public static final String REGEX_PASSWORD = "^(?!.*\\_)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])\\w{8,}$";
     
     /**
      * <i>Class</i> untuk membuat suatu akun.
@@ -22,6 +26,7 @@ public class Account extends Serializable {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.balance = 0.0;
     }
     
     public String toString() {

@@ -1,45 +1,19 @@
 package com.dimasDermawanJBusIO;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.dimasDermawanJBusIO.dbjson.JsonDBEngine;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class JBus {
     public static void main(String[] args) throws InterruptedException {
+        JsonDBEngine.Run(JBus.class);
         SpringApplication.run(JBus.class, args);
-
-//        JsonTable<Account> akuns = null;
-//
-//        try {
-//            String filepath = "C:\\Users\\Den\\Documents\\_perkuliahan\\Semester 3\\Pemrograman Berorientasi Objek dan Praktikum\\Praktikum\\JBus\\data\\accountDatabase.json";
-//
-//            akuns = new JsonTable<Account>(Account.class, filepath);
-//
-//            akuns.add(new Account("Dimas", "den@gmail.com", "NgikNgok"));
-//
-//            JsonTable.writeJson(akuns, filepath);
-//        } catch (Throwable t) {
-//            t.printStackTrace();
-//        }
-//
-//        Bus bus = createBus();
-//        bus.schedules.forEach(Schedule::printSchedule);
-//
-//        for (int i = 0; i < 10; i++) {
-//            BookingThread thread = new BookingThread("Thread " + i,
-//                    bus, Timestamp.valueOf("2023-07-27 19:00:00"));
-//        }
-//
-//        try {
-//            Thread.sleep(1000);
-//        } catch (Throwable t) {
-//            t.printStackTrace();
-//        }
-//
-//        bus.schedules.forEach(Schedule::printSchedule);
+        Runtime.getRuntime().addShutdownHook(new Thread(JsonDBEngine::join));
     }
 
     public static Bus createBus() {
@@ -49,26 +23,10 @@ public class JBus {
 
         try {
             bus.addSchedule(timestamp);
-        } catch (Throwable t) {
-            t.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return bus;
     }
-
-//    public static List<Bus> filterByDeparture(List<Bus> buses, City departure, int page, int pageSize) {
-//        return Algorithm.paginate(Algorithm.collect(buses.toArray(new Bus[0]), bus -> bus.city == departure), page, pageSize, t -> true);
-//    }
-//
-//    public static List<Bus> filterByPrice(List<Bus> buses, int min, int max) {
-//        return Algorithm.collect(buses.toArray(new Bus[0]), bus -> bus.price.price >= min && bus.price.price <= max);
-//    }
-//
-//    public static Bus filterBusId(List<Bus> buses, int id) {
-//        return Algorithm.find(buses.toArray(new Bus[0]), bus -> bus.id == id);
-//    }
-//
-//    public static List<Bus> filterByDepartureAndArrival(List<Bus> buses, City departure, City arrival, int page, int pageSize) {
-//        return Algorithm.paginate(Algorithm.collect(buses.toArray(new Bus[0]), bus -> bus.departure.city == departure && bus.arrival.city == arrival), page, pageSize, t -> true);
-//    }
 }
