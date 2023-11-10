@@ -43,4 +43,34 @@ public class Account extends Serializable {
             return false;
         }
     }
+
+    public static boolean validate(String email, String password) {
+        Pattern patEmail = Pattern.compile(REGEX_EMAIL);
+        Pattern patPassword = Pattern.compile(REGEX_PASSWORD);
+
+        if (patEmail.matcher(email).find() && patPassword.matcher(password).find()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean validateEmail(String email) {
+        Pattern patEmail = Pattern.compile(REGEX_EMAIL);
+
+        if (patEmail.matcher(email).find()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public static boolean validatePassword(String password) {
+        Pattern patPassword = Pattern.compile(REGEX_PASSWORD);
+
+        if (patPassword.matcher(password).find()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

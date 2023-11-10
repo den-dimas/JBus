@@ -137,7 +137,7 @@ public class Algorithm {
 
     public static <T> T find(Iterable<T> iterable, Predicate<T> pred) {
         final Iterator<T> it = iterable.iterator();
-        return find(iterable, pred);
+        return find(it, pred);
     }
 
     public static <T> T find(Iterator<T> iterator, Predicate<T> pred) {
@@ -187,5 +187,29 @@ public class Algorithm {
         }
 
         return temp;
+    }
+
+    public static String hashPassword(String password) {
+        String hashedPass = password;
+
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+
+            md.update(hashedPass.getBytes());
+
+            byte[] bytes = md.digest();
+
+            StringBuilder sb = new StringBuilder();
+
+            for (byte aByte : bytes) {
+                sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
+            }
+
+            hashedPass = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+
+        return hashedPass;
     }
 }

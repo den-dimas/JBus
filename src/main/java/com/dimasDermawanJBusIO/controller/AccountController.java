@@ -14,74 +14,57 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/account")
 public class AccountController implements BasicGetController<Account> {
-    @JsonAutowired(value = Account.class, filepath = "../../../data/accountDatabase.json")
-    public static JsonTable<Account> accountTable;
+    public static @JsonAutowired(value = Account.class, filepath = "data/accountDatabase.json")
+    JsonTable<Account> accountTable;
 
     public JsonTable<Account> getJsonTable() {
         return accountTable;
     }
 
     @GetMapping
-    String index() { return "account page"; }
+    String index() {
+        return "account page";
+    }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    @ResponseBody
-    BaseResponse<Account> register (@RequestParam String name, @RequestParam String email, @RequestParam String password) {
-        Account akun = new Account(name, email, password);
+    BaseResponse<Account> register(@RequestParam String name, @RequestParam String email, @RequestParam String password) {
+        boolean valid = Account.validate(email, password);
 
-        if (akun.name.isBlank() || !akun.validate() || Algorithm.<Account>exists(accountTable, t -> Objects.equals(t.email, akun.email)))
-            return new BaseResponse<>(false, "Gagal register", null);
-        else {
-//        try {
-//            MessageDigest md = MessageDigest.getInstance("MD5");
-//
-//            md.update(akun.password.getBytes());
-//
-//            byte[] bytes = md.digest();
-//
-//            StringBuilder sb= new StringBuilder();
-//
-//            for (byte aByte : bytes) {
-//                sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
-//            }
-//
-//            akun.password = sb.toString();
-//        } catch (NoSuchAlgorithmException e) {
-//            throw new RuntimeException(e);
-//        }
+        boolean emailValid = Account.validateEmail(email);
+        boolean passwordValid = Account.validatePassword(password);
 
-            return new BaseResponse<>(true, "Berhasil register", akun);
-        }
+        if (!emailValid)
+            return new BaseResponse<>(false, "Format email salah!", null);
+
+        if (!passwordValid)
+            return new BaseResponse<>(false, "Format password salah!", null);
+
+        if (name.isBlank())
+            return new BaseResponse<>(false, "Nama tidak boleh kosong!", null);
+
+        if (Algorithm.<Account>exists(accountTable, t -> Objects.equals(t.email, email)))
+            return new BaseResponse<>(false, "Terdapat akun dengan email yang sama!", null);
+
+        Account akun = new Account(name, email, Algorithm.hashPassword(password));
+
+        accountTable.add(akun);
+
+        return new BaseResponse<>(true, "Berhasil register", akun);
     }
 
     @PostMapping("/login")
     BaseResponse<Account> login(@RequestParam String email, @RequestParam String password) {
         Account akun = Algorithm.<Account>find(accountTable, t -> Objects.equals(t.email, email));
 
-        String hashedPass = password;
+        String hashed = Algorithm.hashPassword(password);
 
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
+        if (akun == null)
+            return new BaseResponse<>(false, "Akun tidak ditemukan!", null);
 
-            md.update(hashedPass.getBytes());
+        if (!Objects.equals(akun.password, hashed))
+            return new BaseResponse<>(false, "Password salah!", null);
 
-            byte[] bytes = md.digest();
-
-            StringBuilder sb= new StringBuilder();
-
-            for (byte aByte : bytes) {
-                sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
-            }
-
-            hashedPass = sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-
-        if (Objects.equals(akun.password, hashedPass))
-            return new BaseResponse<>(true, "Berhasil Login", akun);
-        else
-            return new BaseResponse<>(false, "Gagal login", null);
+        return new BaseResponse<>(true, "Berhasil Login", akun);
     }
 
     @PostMapping("/{id}/registerRenter")
@@ -90,7 +73,11 @@ public class AccountController implements BasicGetController<Account> {
 
         if (akun.company == null) {
             Renter renter = new Renter(companyName, address, phoneNumber);
+
             akun.company = renter;
+
+            accountTable.removeElement(akun);
+            accountTable.add(akun);
 
             return new BaseResponse<>(true, "Berhasil mendaftarkan renter baru", renter);
         } else {
@@ -102,15 +89,19 @@ public class AccountController implements BasicGetController<Account> {
     BaseResponse<Double> topUp(@PathVariable int id, @RequestParam double amount) {
         Account akun = Algorithm.<Account>find(getJsonTable(), t -> t.id == id);
 
-        if (akun != null && amount > 0.0) {
-            akun.balance += amount;
+        if (akun == null)
+            return new BaseResponse<>(false, "Akun tidak ditemukan untuk top up!", null);
 
-            return new BaseResponse<>(true, "Berhasil top up", amount);
-        } else {
-            return new BaseResponse<>(false, "Gagal top up", 0.0);
-        }
+
+        if (amount <= 0.0)
+            return new BaseResponse<>(false, "Nominal Top Up tidak valid!", null);
+
+
+        akun.balance += amount;
+
+        accountTable.removeElement(akun);
+        accountTable.add(akun);
+
+        return new BaseResponse<>(true, "Berhasil top up sebanyak " + amount, amount);
     }
-
-//    @GetMapping("/{id}")
-//    String getById(@PathVariable int id) { return "account id " + id + " not found!"; }
 }
