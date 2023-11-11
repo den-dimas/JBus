@@ -1,5 +1,6 @@
 package com.dimasDermawanJBusIO.controller;
 
+import com.dimasDermawanJBusIO.Account;
 import com.dimasDermawanJBusIO.Algorithm;
 import com.dimasDermawanJBusIO.Bus;
 import com.dimasDermawanJBusIO.dbjson.JsonTable;
@@ -7,9 +8,11 @@ import com.dimasDermawanJBusIO.dbjson.Serializable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@RestController
 public interface BasicGetController<T extends Serializable> {
     abstract JsonTable<T> getJsonTable();
 
