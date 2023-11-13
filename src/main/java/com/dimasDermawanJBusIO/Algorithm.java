@@ -78,7 +78,7 @@ public class Algorithm {
 
     public static <T> int count(Iterable<T> iterable, Predicate<T> pred) {
         final Iterator<T> it = iterable.iterator();
-        return count(iterable, pred);
+        return count(it, pred);
     }
 
     public static <T> boolean exists(T[] array, T value) {
@@ -173,7 +173,7 @@ public class Algorithm {
 
     public static <T> List<T> collect(Iterable<T> iterable, Predicate<T> pred) {
         final Iterator<T> it = iterable.iterator();
-        return collect(iterable, pred);
+        return collect(it, pred);
     }
 
     public static <T> List<T> collect(Iterator<T> iterator, Predicate<T> pred) {

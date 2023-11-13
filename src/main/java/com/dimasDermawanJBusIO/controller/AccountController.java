@@ -74,6 +74,8 @@ public class AccountController implements BasicGetController<Account> {
         if (akun.company == null) {
             Renter renter = new Renter(companyName, address, phoneNumber);
 
+            if (!renter.validate()) return new BaseResponse<>(false, "Masukkan nama dan nomor telpon yang benar!", null);
+
             akun.company = renter;
 
             accountTable.removeElement(akun);

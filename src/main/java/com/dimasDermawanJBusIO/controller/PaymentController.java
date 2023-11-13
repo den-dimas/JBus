@@ -28,7 +28,10 @@ public class PaymentController implements BasicGetController<Payment> {
             @RequestParam String departureDate
     ) {
         Account buyer = Algorithm.<Account>find(AccountController.accountTable, a -> a.id == buyerId);
-        Account renter = Algorithm.<Account>find(AccountController.accountTable, a -> a.company.id == renterId);
+
+        List<Account> isRenter = Algorithm.<Account>collect(AccountController.accountTable, a -> a.company != null);
+        Account renter = Algorithm.<Account>find(isRenter, a -> a.id == renterId);
+
         Bus bus = Algorithm.<Bus>find(BusController.busTable, b -> b.id == busId);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd, MMMM yyyy HH:mm:ss");
