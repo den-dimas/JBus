@@ -36,3 +36,8 @@ out/
 
 ### VS Code ###
 .vscode/
+grade/
+.gradle
+gradlew
+gradlew.bat
+settings.gradle
