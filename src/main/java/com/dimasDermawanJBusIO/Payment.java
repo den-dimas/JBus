@@ -8,11 +8,11 @@ import java.util.List;
 public class Payment extends Invoice {
     private int busId;
     
-    public String busSeat;
+    public List<String> busSeat;
     public Timestamp departureDate;
     
-    public Payment(int id, int buyerId, int renterId, int busId, String busSeat, Timestamp departureDate) {
-        super(id, buyerId, renterId);
+    public Payment(int buyerId, int renterId, int busId, List<String> busSeat, Timestamp departureDate) {
+        super(buyerId, renterId);
         
         this.busId = busId;        
         this.busSeat = busSeat;
@@ -20,8 +20,8 @@ public class Payment extends Invoice {
         this.departureDate = departureDate;
     }
     
-    public Payment(int id, Account buyer, Renter renter, int busId, String busSeat, Timestamp departureDate) {
-        super(id, buyer, renter);
+    public Payment(Account buyer, Renter renter, int busId, List<String> busSeat, Timestamp departureDate) {
+        super(buyer, renter);
         
         this.busId = busId;
         this.busSeat = busSeat;
@@ -64,6 +64,14 @@ public class Payment extends Invoice {
             if (departureSchedule.compareTo(s.departureSchedule) == 0 && s.isSeatAvailable(seats)) {
                 return s;
             }
+        }
+
+        return null;
+    }
+
+    public static Schedule availableSchedule(Timestamp departureSchedule, Bus bus) {
+        for (Schedule s : bus.schedules) {
+            if (departureSchedule.equals(departureSchedule)) return s;
         }
 
         return null;

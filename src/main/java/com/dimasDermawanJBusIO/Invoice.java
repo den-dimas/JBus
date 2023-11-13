@@ -15,7 +15,7 @@ public class Invoice extends Serializable {
     public enum BusRating { NONE, NEUTRAL, GOOD, BAD }
     public enum PaymentStatus { FAILED, WAITING, SUCCESS }
     
-    protected Invoice(int id, int buyerId, int renterId) {
+    protected Invoice(int buyerId, int renterId) {
         // Stamp time
         time = new Timestamp(System.currentTimeMillis());
         
@@ -27,7 +27,7 @@ public class Invoice extends Serializable {
         this.status = PaymentStatus.WAITING;
     }
     
-    public Invoice(int id, Account buyer, Renter renter) {
+    public Invoice(Account buyer, Renter renter) {
         // Stamp time
         time = new Timestamp(System.currentTimeMillis());
         

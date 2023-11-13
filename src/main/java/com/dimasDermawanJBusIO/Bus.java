@@ -12,19 +12,18 @@ public class Bus extends Serializable {
     public Station departure;
     public Station arrival;
     public Price price;
-    public Facility facility;    
+    public List<Facility> facility;
     public int capacity;
+    public int accountId;
     public BusType busType;
-    public City city;
     public List<Schedule> schedules;
     
-    public Bus(String name, Facility facility, Price price, int capacity, BusType busType, City city, Station departure, Station arrival) {
+    public Bus(String name, List<Facility> facility, Price price, int capacity, BusType busType, Station departure, Station arrival) {
         this.name = name;
         this.facility = facility;
         this.price = price;
         this.capacity = capacity;
         this.busType = busType;
-        this.city = city;
         this.departure = departure;
         this.arrival = arrival;
         
@@ -32,7 +31,15 @@ public class Bus extends Serializable {
     }
     
     public String toString() {
-        return "Bus ID : " + super.id + "\nNama Bus : " + name + "\nBerangkat : " + departure.city + "\nTujuan : " + arrival.city + "\nHarga : " + price.price + "\nFasilitas : " + facility + "\nKapasitas: " + capacity + "\nTipe Bus : " + busType + "\nKota : " + city + "\n";
+        return
+            "Bus ID : " + super.id +
+            "\nNama Bus : " + name +
+            "\nBerangkat : " + departure.city +
+            "\nTujuan : " + arrival.city +
+            "\nHarga : " + price.price +
+            "\nFasilitas : " + facility +
+            "\nKapasitas: " + capacity +
+            "\nTipe Bus : " + busType;
     }
 
     public void addSchedule(Timestamp time) throws IOException {

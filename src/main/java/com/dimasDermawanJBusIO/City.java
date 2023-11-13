@@ -3,10 +3,14 @@ package com.dimasDermawanJBusIO;
 public enum City
 {
     JAKARTA, 
-    BANDUNG, 
-    DEPOK, 
+    BANDUNG,
+    DEPOK,
     SEMARANG, 
     SURABAYA, 
     BALI, 
-    YOGYAKARTA
+    YOGYAKARTA,
+    TANGERANG,
+    BOGOR,
+    BEKASI,
+    SUKABUMI
 }
