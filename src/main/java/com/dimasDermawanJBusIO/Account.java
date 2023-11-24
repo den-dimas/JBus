@@ -12,7 +12,7 @@ public class Account extends Serializable {
     public Renter company;
     public double balance;
 
-    public static final String REGEX_EMAIL = "^(^[a-zA-Z0-9])([a-zA-Z0-9\\.]+)([a-zA-Z0-9]+)(\\@)([a-zA-Z])+(\\.)(com)$";
+    public static final String REGEX_EMAIL = "^[a-zA-Z0-9]+@[a-zA-Z]+(\\.[a-zA-Z]+)+$";
     public static final String REGEX_PASSWORD = "^(?!.*\\_)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])\\w{8,}$";
     
     /**
