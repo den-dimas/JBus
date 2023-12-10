@@ -18,7 +18,8 @@ public class Bus extends Serializable {
     public BusType busType;
     public List<Schedule> schedules;
     
-    public Bus(String name, List<Facility> facility, Price price, int capacity, BusType busType, Station departure, Station arrival) {
+    public Bus(int accountId, String name, List<Facility> facility, Price price, int capacity, BusType busType, Station departure, Station arrival) {
+        this.accountId = accountId;
         this.name = name;
         this.facility = facility;
         this.price = price;
@@ -27,7 +28,7 @@ public class Bus extends Serializable {
         this.departure = departure;
         this.arrival = arrival;
         
-        this.schedules = new ArrayList<Schedule>();
+        this.schedules = new ArrayList<>();
     }
     
     public String toString() {
@@ -43,7 +44,9 @@ public class Bus extends Serializable {
     }
 
     public void addSchedule(Timestamp time) throws IOException {
-        if (!schedules.contains(new Schedule(time, this.capacity)))
+        Schedule schedule = Algorithm.<Schedule>find(schedules, s -> s.departureSchedule.equals(time));
+
+        if (schedule == null)
             schedules.add(new Schedule(time, this.capacity));
         else
             throw new IOException();
